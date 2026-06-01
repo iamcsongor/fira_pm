@@ -32,6 +32,17 @@ npm run build      # outputs to dist/
 npm run preview    # preview the production build locally
 ```
 
+## Deploy to Vercel
+
+This is a standard Vite app, so Vercel deploys it with zero configuration:
+
+1. Go to [vercel.com/new](https://vercel.com/new) and sign in (GitHub works).
+2. **Import** the `fira_pm` repository. If it isn't listed, use *Adjust GitHub App Permissions* to grant access.
+3. Vercel auto-detects **Vite** and fills in the settings — Build Command `npm run build`, Output Directory `dist`, Install Command `npm install`. Leave them as-is.
+4. Click **Deploy**. You'll get a live `*.vercel.app` URL in under a minute.
+
+Every push to `main` then deploys automatically, and pull requests get preview URLs. No environment variables are required — the app runs entirely client-side and persists data in `localStorage`.
+
 ## Project structure
 
 ```
