@@ -1,0 +1,127 @@
+/* Fira PM — slide / detail-card styles (3 layouts) */
+
+/* ----- shared panel ----- */
+.panel { background:var(--surface); border:1px solid var(--line); border-radius:13px; padding:17px 19px; display:flex; flex-direction:column; min-height:0; min-width:0; }
+.panel-label { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); display:flex; align-items:center; gap:7px; margin-bottom:11px; flex:0 0 auto; }
+.panel-label svg { width:14px; height:14px; color:var(--muted-2); }
+.panel-body { font-size:15px; line-height:1.52; color:var(--ink-2); min-height:0; overflow:hidden; }
+.panel.tint-weekly { background:var(--accent-tint); border-color:color-mix(in oklch, var(--accent) 24%, var(--line)); }
+.panel.tint-weekly .panel-label { color:var(--accent-ink); }
+.panel.tint-deps { background:var(--blocked-tint); border-color:color-mix(in oklch, var(--blocked) 26%, var(--line)); }
+.panel.tint-deps .panel-label { color:#b23a3a; }
+.panel.tint-deps .panel-label svg { color:#c25555; }
+.panel.tint-final { background:var(--done-tint); border-color:color-mix(in oklch, var(--done) 26%, var(--line)); }
+.panel.tint-final .panel-label { color:#177a45; }
+.panel.tint-final .panel-label svg { color:#2a9d63; }
+
+.clamp { display:-webkit-box; -webkit-box-orient:vertical; overflow:hidden; }
+.placeholder-line { color:var(--muted-2); font-style:italic; }
+
+/* ----- milestones ----- */
+.ms-timeline { display:flex; flex-direction:column; }
+.ms-row { display:grid; grid-template-columns:22px 1fr; gap:13px; }
+.ms-node { display:flex; flex-direction:column; align-items:center; }
+.ms-bullet { width:20px; height:20px; border-radius:50%; border:2px solid var(--line-strong); background:var(--surface); display:grid; place-items:center; color:#fff; flex:0 0 auto; }
+.ms-row.done .ms-bullet { background:var(--done); border-color:var(--done); }
+.ms-bullet svg { width:12px; height:12px; }
+.ms-line { width:2px; flex:1; background:var(--line); min-height:10px; }
+.ms-row.done .ms-line { background:color-mix(in oklch, var(--done) 45%, var(--line)); }
+.ms-text { padding-bottom:13px; }
+.ms-row:last-child .ms-text { padding-bottom:0; }
+.ms-label { font-size:14.5px; font-weight:500; color:var(--ink); line-height:1.35; }
+.ms-row.done .ms-label { color:var(--muted); }
+.ms-date { font-size:12px; color:var(--muted-2); font-family:var(--mono); margin-top:2px; }
+
+/* ----- meta rows ----- */
+.metalist { display:flex; flex-direction:column; }
+.meta-row { display:flex; align-items:center; gap:11px; padding:8px 0; font-size:14.5px; border-bottom:1px solid var(--line); }
+.meta-row:last-child { border-bottom:0; }
+.meta-row .mk { color:var(--muted); width:74px; flex:0 0 auto; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; display:flex; align-items:center; gap:7px; }
+.meta-row .mk svg { width:14px; height:14px; color:var(--muted-2); }
+.meta-row .mv { color:var(--ink); min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:flex; align-items:center; gap:8px; }
+.slacklink { color:var(--accent); font-family:var(--mono); font-size:13.5px; text-decoration:none; overflow:hidden; text-overflow:ellipsis; }
+.slacklink:hover { text-decoration:underline; }
+.urlline { color:var(--muted); font-family:var(--mono); font-size:12.5px; }
+
+/* ----- eta chip ----- */
+.eta-chip { display:inline-flex; align-items:center; gap:11px; }
+.eta-chip .ic { width:30px; height:30px; border-radius:8px; background:var(--surface-2); border:1px solid var(--line); display:grid; place-items:center; color:var(--muted); flex:0 0 auto; }
+.eta-chip .d { font-weight:700; font-size:17px; letter-spacing:-.01em; white-space:nowrap; }
+.eta-chip .r { font-size:12px; color:var(--muted); font-family:var(--mono); }
+
+/* ----- weekly ----- */
+.weekly-week { font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--accent-ink); margin-bottom:9px; display:flex; align-items:center; gap:7px; }
+.weekly-week .pip { width:7px; height:7px; border-radius:50%; background:var(--accent); }
+.weekly-text { font-size:17px; line-height:1.5; color:var(--ink); }
+
+/* ====================================================== */
+/* DETAIL CARD base                                       */
+/* ====================================================== */
+.dcard { position:absolute; inset:0; padding:42px 46px; display:flex; flex-direction:column; }
+.dcard .id-name { font-size:38px; font-weight:700; letter-spacing:-.025em; line-height:1.05; color:var(--ink); }
+.v-A .statpanel .panel-body, .v-A .a-etastat .panel-body { overflow:visible; }
+.dcard .id-sub { font-size:19px; color:var(--muted); margin-top:7px; font-weight:400; line-height:1.3; }
+.team-tag { display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); }
+.team-tag .swatch { width:11px; height:11px; border-radius:3px; flex:0 0 auto; }
+
+/* ---------- Layout A : wireframe-faithful ---------- */
+.v-A .grid {
+  flex:1; display:grid; gap:14px; min-height:0;
+  grid-template-columns:1.5fr 1fr;
+  grid-template-rows:auto auto 1fr auto;
+  grid-template-areas:
+    "head    meta"
+    "purpose etastat"
+    "roadmap weekly"
+    "deps    final";
+}
+.v-A .a-head { grid-area:head; align-self:center; }
+.v-A .a-meta { grid-area:meta; }
+.v-A .a-purpose { grid-area:purpose; }
+.v-A .a-etastat { grid-area:etastat; display:flex; gap:14px; align-items:stretch; }
+.v-A .a-etastat .panel { flex:1; justify-content:center; }
+.v-A .a-roadmap { grid-area:roadmap; }
+.v-A .a-weekly { grid-area:weekly; }
+.v-A .a-deps { grid-area:deps; }
+.v-A .a-final { grid-area:final; }
+.v-A .statpanel { align-items:flex-start; }
+
+/* ---------- Layout B : report w/ sidebar ---------- */
+.v-B { flex-direction:row; padding:0; }
+.v-B .side { width:330px; flex:0 0 auto; background:var(--surface-2); border-right:1px solid var(--line); padding:40px 30px; display:flex; flex-direction:column; gap:22px; }
+.v-B .side .id-name { font-size:30px; }
+.v-B .side .id-sub { font-size:16px; }
+.v-B .side-block .panel-label { margin-bottom:8px; }
+.v-B .side-status { display:flex; flex-direction:column; gap:14px; }
+.v-B .roi-big { font-family:var(--mono); font-size:30px; font-weight:600; color:var(--ink); letter-spacing:-.02em; }
+.v-B .main { flex:1; padding:38px 40px; display:grid; gap:15px; min-width:0;
+  grid-template-columns:1.35fr 1fr; grid-template-rows:auto 1fr auto;
+  grid-template-areas:"purpose weekly" "roadmap weekly" "deps final"; }
+.v-B .b-purpose{grid-area:purpose;} .v-B .b-roadmap{grid-area:roadmap;}
+.v-B .b-weekly{grid-area:weekly;} .v-B .b-deps{grid-area:deps;} .v-B .b-final{grid-area:final;}
+
+/* ---------- Layout C : board card ---------- */
+.v-C { padding:0; }
+.v-C .band { padding:30px 46px 26px; border-bottom:1px solid var(--line); position:relative; }
+.v-C .band::before { content:""; position:absolute; left:0; top:0; bottom:0; width:7px; background:var(--band-color, var(--accent)); }
+.v-C .band-top { display:flex; align-items:flex-start; gap:20px; }
+.v-C .band .id-name { font-size:34px; }
+.v-C .band .spacer { flex:1; }
+.v-C .chiprow { display:flex; gap:24px; align-items:center; margin-top:18px; flex-wrap:wrap; }
+.v-C .chip-meta { display:flex; align-items:center; gap:9px; font-size:13.5px; color:var(--ink-2); white-space:nowrap; }
+.v-C .chip-meta svg { width:16px; height:16px; color:var(--muted-2); }
+.v-C .chip-meta b { font-weight:600; color:var(--ink); }
+.v-C .cbody { flex:1; display:grid; gap:14px; padding:22px 46px 30px; min-height:0;
+  grid-template-columns:1fr 1fr; grid-template-rows:1fr auto;
+  grid-template-areas:"purpose weekly" "roadmap weekly" "deps final"; }
+.v-C .cbody { grid-template-rows:auto 1fr auto; }
+.v-C .c-purpose{grid-area:purpose;} .v-C .c-roadmap{grid-area:roadmap;}
+.v-C .c-weekly{grid-area:weekly;} .v-C .c-deps{grid-area:deps;} .v-C .c-final{grid-area:final;}
+.v-C .roi-inline { font-family:var(--mono); font-weight:600; }
+
+/* ----- summary-as-slide: compact so all rows fit 1280x720 ----- */
+.sslide .thead > div { padding:9px 16px; }
+.sslide .trow > div { padding:8px 16px; }
+.sslide .team-rail span { font-size:9px; letter-spacing:.03em; padding:5px 0; }
+.sslide .cell-obj { font-size:12.5px; }
+.sslide .tbl { display:flex; flex-direction:column; }
